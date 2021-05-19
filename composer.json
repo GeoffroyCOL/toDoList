@@ -1,4 +1,6 @@
 {
+    "name": "geoffroycol/todolist",
+    "description": "une application de todolist",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
@@ -7,7 +9,7 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "composer/package-versions-deprecated": "1.11.99.1",
+        "composer/package-versions-deprecated": "1.11.99.*",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.1",
