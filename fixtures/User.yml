@@ -1,0 +1,11 @@
+App\Entity\User:
+  user_1:
+    username: username
+    email: <email()>
+    password: \$2y\$10\$qbJZed1cGHuRWf.ExUQZSexbX/NT6TUYeVKu3E6BlD5uF130aKRsK
+    roles: ["ROLE_ADMIN_LIST"]
+  user_{2..10}:
+    username (unique): username_<current()>
+    email: <email()>
+    password: \$2y\$10\$qbJZed1cGHuRWf.ExUQZSexbX/NT6TUYeVKu3E6BlD5uF130aKRsK
+    roles: ["ROLE_ADMIN_LIST"]

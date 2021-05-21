@@ -42,7 +42,7 @@ abstract class Element
     protected $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $limitedAt;
 
@@ -131,10 +131,10 @@ abstract class Element
     }
     
     /**
-     * @param  \DateTimeInterface $limitedAt
+     * @param  \DateTimeInterface|null $limitedAt
      * @return self
      */
-    public function setLimitedAt(\DateTimeInterface $limitedAt): self
+    public function setLimitedAt(?\DateTimeInterface $limitedAt): self
     {
         $this->limitedAt = $limitedAt;
 
