@@ -38,3 +38,7 @@ services:
                 name: 'doctrine.orm.entity_listener'
                 event: 'postPersist'
                 entity: 'App\Entity\User'
+
+    App\Listener\LoginListener:
+        tags:
+            - name: 'security.interactive_login'

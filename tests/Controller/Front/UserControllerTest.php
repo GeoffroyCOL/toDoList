@@ -52,7 +52,7 @@ class UserController extends WebTestCase
     public function setRouteForUserFrontController(): array
     {
         return [
-            ['/inscription',   Response::HTTP_OK],
+            ['/inscription',   Response::HTTP_OK]
         ];
     }
 }
