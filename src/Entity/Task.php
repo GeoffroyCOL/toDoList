@@ -21,15 +21,12 @@ class Task extends Element
      * @ORM\Column(type="text", nullable=true)
      */
     protected $note;
-    
-    /**
-     * @return int|null
-     */
+
     public function getId(): ?int
     {
         return $this->id;
     }
-    
+
     /**
      * @return string
      */
@@ -37,11 +34,7 @@ class Task extends Element
     {
         return $this->note;
     }
-    
-    /**
-     * @param  string|null $note
-     * @return self
-     */
+
     public function setNote(?string $note): self
     {
         $this->note = $note;
