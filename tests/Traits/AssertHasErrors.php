@@ -6,11 +6,9 @@ trait AssertHasErrors
 {
     /**
      * assertHasErrors
-     * Permet de vérifie les contraintes de validation d'une entité
+     * Permet de vérifie les contraintes de validation d'une entité.
      *
-     * @param  mixed $entity
-     * @param  int $number
-     * @return void
+     * @param mixed $entity
      */
     public function assertHasErrors($entity, int $number = 0): void
     {
@@ -20,7 +18,7 @@ trait AssertHasErrors
 
         /** @var ConstraintViolation $error */
         foreach ($errors as $error) {
-            $messages[] = $error->getPropertyPath() . ' => ' . $error->getMessage();
+            $messages[] = $error->getPropertyPath().' => '.$error->getMessage();
         }
 
         $this->assertCount($number, $errors, implode(', ', $messages));
