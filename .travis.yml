@@ -1,20 +1,24 @@
 language: php
+sudo: false
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/symfony-bridge/.phpunit
+
 php:
   - '8.0'
 
-warnings_are_errors: false
-
 services:
   - mysql
-  - docker
+  - docker-compose
 
 install:
-  - docker-compose up -d
   - composer install --prefer-dist --no-interaction
   - php bin/console doctrine:database:create --env=test
   - php bin/console doctrine:schema:update --force --env=test
   - php bin/console hautelook:fixtures:load -n --env=test
 
 script:
+  - docker-compose up -d
   - composer install
   - vendor/bin/phpunit --testdox
