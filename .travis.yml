@@ -1,5 +1,7 @@
 language: php
-sudo: false
+
+sudo: required
+
 cache:
   directories:
     - $HOME/.composer/cache
@@ -12,6 +14,17 @@ services:
   - mysql
   - docker-compose
 
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+before_install:
+  - sudo /etc/init.d/mysql stop
+  - sudo /etc/init.d/postgresql stop
+  - docker -v
+  - docker-compose -v
+
 install:
   - composer install --prefer-dist --no-interaction
   - php bin/console doctrine:database:create --env=test
@@ -19,6 +32,9 @@ install:
   - php bin/console hautelook:fixtures:load -n --env=test
 
 script:
-  - docker-compose up -d
+  - docker-compose -f docker-stack.yaml build
+  - docker-compose -f docker-stack.yaml up -d
+  - docker-compose -f docker-stack.yaml ps
+  - docker-compose -f docker-stack.yaml stop
   - composer install
   - vendor/bin/phpunit --testdox
