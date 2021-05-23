@@ -6,6 +6,7 @@ warnings_are_errors: false
 
 services:
   - mysql
+  - docker
 
 install:
   - composer install --prefer-dist --no-interaction
