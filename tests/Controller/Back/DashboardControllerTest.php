@@ -3,16 +3,13 @@
 namespace Test\controller\Back;
 
 use App\Repository\UserRepository;
-use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
-class BashboardControllerTest extends WebTestCase
+class DashboardControllerTest extends WebTestCase
 {
-    use ReloadDatabaseTrait;
-    
     /**
      * testRouteForDashboardcontrollerNotLogin
      * Si un utilisateur n'est pas connecté alors il ne pourra pas accéder à la page "dashboard"
