@@ -30,8 +30,6 @@ class UserListener
      * prePersist
      * Quand un utilisateur supprime son profil
      * 
-     * @param User $user 
-     * 
      * @return void
      */
     public function postRemove()
