@@ -40,4 +40,14 @@ class UserService
         $this->manager->persist($user);
         $this->manager->flush();
     }
+    
+    /**
+     * @param  User $user
+     * @return void
+     */
+    public function delete(User $user): void
+    {
+        $this->manager->remove($user);
+        $this->manager->flush();
+    }
 }

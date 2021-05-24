@@ -36,4 +36,13 @@ class UserController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/admin/user/delete/{id}', name: 'user.delete')]
+    public function deleteUser(User $user)
+    {
+        $this->denyAccessUnlessGranted('USER_OWN', $user, 'Vous ne pouvez pas supprimer ce profil');
+
+        $this->userService->delete($user);
+        return $this->redirectToRoute('home');
+    }
 }

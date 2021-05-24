@@ -34,10 +34,8 @@ services:
 
     App\Listener\UserListener:
         tags:
-            - 
-                name: 'doctrine.orm.entity_listener'
-                event: 'postPersist'
-                entity: 'App\Entity\User'
+            - { name: 'doctrine.orm.entity_listener', event: 'postPersist', entity: 'App\Entity\User', lazy: true }
+            - { name: 'doctrine.orm.entity_listener', event: 'postRemove', lazy: true }
 
     App\Listener\LoginListener:
         tags:
