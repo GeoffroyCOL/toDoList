@@ -4,8 +4,10 @@ App\Entity\Task:
     description: <text()>
     createdBy: "@user_<numberBetween(1, 10)>"
     note: <text()>
+    status: en cours
   task_{2..10}:
     name: La tâche <current()>
     description: <text()>
     createdBy: "@user_<numberBetween(1, 10)>"
     note: <text()>
+    status: en cours

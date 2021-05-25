@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ElementRepository::class)
@@ -19,6 +22,10 @@ use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
  */
 abstract class Element
 {
+    const STATUS = [
+        "terminé", "en cours", "non commencé"
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -29,11 +36,21 @@ abstract class Element
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Assert\NotBlank(
+        message: 'Ce champs ne peut pas être vide'
+    )]
+    #[Assert\Length(
+        min: 6,
+        minMessage: 'Le nom du projet doit contenir au minimum {{ limit }} caractères.'
+    )]
     protected $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+    #[Assert\NotBlank(
+        message: 'Ce champs ne peut pas être vide'
+    )]
     protected $description;
 
     /**
@@ -44,6 +61,10 @@ abstract class Element
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
+    #[Assert\GreaterThanOrEqual(
+        'today',
+        message: "La date de fin ne doit pas être inférieur à : {{ compared_value }}"
+    )]
     protected $limitedAt;
 
     /**
@@ -52,9 +73,19 @@ abstract class Element
      */
     private $createdBy;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    #[Assert\Choice(
+        choices: self::STATUS, 
+        message: "Ce choix n'est pas valide."
+    )]
+    protected $status;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->status = 'non commencé';
     }
 
     public function getId(): ?int
@@ -110,14 +141,26 @@ abstract class Element
         return $this;
     }
 
-    public function getCreatedBy(): ?User
+    public function getCreatedBy(): ?UserInterface
     {
         return $this->createdBy;
     }
 
-    public function setCreatedBy(?User $createdBy): self
+    public function setCreatedBy(?UserInterface $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
