@@ -22,6 +22,11 @@ class Task extends Element
      */
     protected $note;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Project::class)
+     */
+    private $project;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,6 +43,18 @@ class Task extends Element
     public function setNote(?string $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }

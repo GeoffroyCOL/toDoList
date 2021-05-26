@@ -17,25 +17,8 @@ class Project extends Element
      */
     protected $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Task::class)
-     */
-    protected $tasks;
-
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTasks(): ?Task
-    {
-        return $this->tasks;
-    }
-
-    public function setTasks(?Task $tasks): self
-    {
-        $this->tasks = $tasks;
-
-        return $this;
     }
 }
