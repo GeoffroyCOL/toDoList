@@ -41,6 +41,7 @@ class TaskControllerTest extends WebTestCase
         return [
             "Pour l'ajout d'une nouvelle tâche"  => ['/admin/task/add', Response::HTTP_FOUND],
             "Pour la modification d'une tâche"   => ['/admin/task/edit/11', Response::HTTP_FOUND],
+            "Pour la suppression d'une tâche"    => ['/admin/task/delete/11', Response::HTTP_FOUND]
         ];
     }
 
@@ -75,7 +76,9 @@ class TaskControllerTest extends WebTestCase
             "Pour l'ajout d'une nouvelle tâche d'un projet ne m'appartenant pas"    => ['/admin/task/add?project=2', Response::HTTP_FORBIDDEN],
             "Pour l'ajout d'une nouvelle tâche d'un projet qui n'existe pas"        => ['/admin/task/add?project=2000', Response::HTTP_FORBIDDEN],
             "Pour la modification d'une tâche m'appartenant"                        => ['/admin/task/edit/11', Response::HTTP_OK],
-            "Pour la modification d'une tâche ne m'appartenant pas"                 => ['/admin/task/edit/12', Response::HTTP_FORBIDDEN]
+            "Pour la modification d'une tâche ne m'appartenant pas"                 => ['/admin/task/edit/12', Response::HTTP_FORBIDDEN],
+            "Pour la suppressino d'une tâche m'appartenant"                         => ['/admin/task/delete/11', Response::HTTP_FOUND],
+            "Pour la suppressino d'une tâche ne m'appartenant pas"                  => ['/admin/task/delete/12', Response::HTTP_FORBIDDEN]
         ];
     }
     
@@ -104,8 +107,11 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertEquals(true, $client->getResponse()->isRedirect('/admin/project/1'));
     }
-
-    public function testEditTask()
+    
+    /**
+     * @return void
+     */
+    public function testEditTask(): void
     {
         $client = static::createClient();
         $this->login($client);
@@ -118,6 +124,18 @@ class TaskControllerTest extends WebTestCase
         $form['task_edit[note]'] = 'Une note';
         $client->submit($form);
 
+        $this->assertEquals(true, $client->getResponse()->isRedirect('/admin/project/1'));
+    }
+    
+    /**
+     * @return void
+     */
+    public function testDeleteTask(): void
+    {
+        $client = static::createClient();
+        $this->login($client);
+
+        $crawler = $client->request(Request::METHOD_GET, '/admin/task/delete/11');
         $this->assertEquals(true, $client->getResponse()->isRedirect('/admin/project/1'));
     }
 

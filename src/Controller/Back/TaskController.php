@@ -89,4 +89,18 @@ class TaskController extends AbstractController
             'action'    => 'modifier'
         ]);
     }
+    
+    /**
+     * @param  Task $task
+     * @return Response
+     */
+    #[Route('/admin/task/delete/{id}', name: 'task.delete', requirements: ['id' => '\d+'])]
+    public function deleteTask(Task $task): Response
+    {
+        $this->denyAccessUnlessGranted('TASK_OWN', $task, 'Vous ne pouvez supprimer cette tâche.');
+
+        $this->taskService->delete($task);
+        $this->addFlash('success', 'Votre tâche à bien été supprimée.');
+        return $this->redirectToRoute('project.show', ['id' => $task->getProject()->getId()]);
+    }
 }

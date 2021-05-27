@@ -22,4 +22,14 @@ class TaskService
         $this->manager->persist($task);
         $this->manager->flush();
     }
+    
+    /**
+     * @param  Task $task
+     * @return void
+     */
+    public function delete(Task $task): void
+    {
+        $this->manager->remove($task);
+        $this->manager->flush();
+    }
 }
