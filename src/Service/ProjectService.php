@@ -17,12 +17,23 @@ class ProjectService
     ) {}
     
     /**
+     * Récupère la liste des projets d'un utilisateur
+     * 
      * @param  User $user
      * @return array
      */
     public function getProjectsByUser(User $user): array
     {
         return $this->repository->findBy(['createdBy' => $user]);
+    }
+    
+    /**
+     * @param  int $id
+     * @return Project|null
+     */
+    public function getProject(int $id): ?Project
+    {
+        return $this->repository->find($id);
     }
     
     /**

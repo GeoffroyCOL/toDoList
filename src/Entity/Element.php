@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 abstract class Element
 {
     const STATUS = [
-        "terminé", "en cours", "non commencé"
+        "terminé", "en cours", "a faire"
     ];
 
     /**
@@ -85,7 +85,7 @@ abstract class Element
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->status = 'non commencé';
+        $this->status = 'a faire';
     }
 
     public function getId(): ?int

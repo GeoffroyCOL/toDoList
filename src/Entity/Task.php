@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TaskRepository::class)
@@ -25,7 +26,10 @@ class Task extends Element
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)
      */
-    private $project;
+    #[Assert\NotBlank(
+        message: 'Ce champs ne peut pas être vide'
+    )]
+    protected $project;
 
     public function getId(): ?int
     {
@@ -51,7 +55,7 @@ class Task extends Element
     {
         return $this->project;
     }
-
+    
     public function setProject(?Project $project): self
     {
         $this->project = $project;
