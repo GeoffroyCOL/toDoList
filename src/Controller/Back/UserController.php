@@ -39,10 +39,10 @@ class UserController extends AbstractController
 
     /**
      * @param  User $user
-     * @return void
+     * @return Response
      */
     #[Route('/admin/user/delete/{id}', name: 'user.delete', requirements: ['id' => '\d+'])]
-    public function deleteUser(User $user)
+    public function deleteUser(User $user): Response
     {
         $this->denyAccessUnlessGranted('USER_OWN', $user, 'Vous ne pouvez pas supprimer ce profil');
 
