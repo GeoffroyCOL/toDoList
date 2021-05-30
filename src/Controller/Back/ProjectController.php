@@ -36,7 +36,9 @@ class ProjectController extends AbstractController
         $projects = $this->projectService->getProjectsByUser($user);
 
         return $this->render('back/project/list.html.twig', [
-            'projects' => $projects
+            'projects'      => $projects,
+            'current_page'  => 'projets',
+            'component'         => 'admin'
         ]);
     }
     

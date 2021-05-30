@@ -40,7 +40,8 @@ class UserController extends AbstractController
         }
 
         return $this->render('front/user/register.html.twig', [
-            'form' => $form->createView(),
+            'form'          => $form->createView(),
+            'current_page'  => 'inscription'
         ]);
     }
 }
