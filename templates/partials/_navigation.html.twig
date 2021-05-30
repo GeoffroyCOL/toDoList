@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark {% if component is defined and component == 'admin' %} bg-dark {% else %} bg-primary {% endif %}">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('home') }}">ToDolist</a>
+        <button class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            {% if component is not defined %}
+                <li class="nav-item">
+                    <a  class="nav-link {% if current_page is defined and current_page == 'inscription' %} active {% endif %}" 
+                        href="{{ path('user.register') }}">Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link {% if current_page is defined and current_page == 'connexion' %} active {% endif %}" 
+                        href="{{ path('app_login') }}">Connexion</a>
+                </li>
+                {% endif %}
+
+            {% if app.user %}
+                <li class="nav-item">
+                    <a  class="nav-link {% if current_page is defined and current_page == 'dashboard' %} active {% endif %}" 
+                        href="{{ path('dashboard') }}">Dashboard</a>
+                </li>
+                {% if component is defined %}
+                <li class="nav-item">
+                    <a  class="nav-link {% if current_page is defined and current_page == 'projets' %} active {% endif %}" 
+                        href="{{ path('projects.list') }}">Mes projets</a>
+                </li>
+                {% endif %}
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
