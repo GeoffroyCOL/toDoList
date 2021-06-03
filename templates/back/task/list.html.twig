@@ -3,15 +3,20 @@
     <div class="col-12 col-lg-6 mb-3 mb-md-4">
         <div class="card shadow">
             <div class="card-body">
-                <h4 class="h6 mb-3">{{ task.name }}</h4>
+                <h4 class="h6 {% if task.limitedAt is null %}mb-3{% else %}mb-0{% endif %}">{{ task.name }}</h4>
+                {% if task.limitedAt %}
+                    <p>Date limite de réalisation : {{ task.limitedAt | date('d/m/Y') }}</p>
+                {% endif %}
                 <p>{{ task.description }}</p>
 
                 <p class="position-absolute task-icon">
                     {% if task.status == 'terminé' %} <i class="far fa-check-circle text-success"></i>
                         {% else %} <i class="fas fa-times text-danger"></i>
                     {% endif %}
+                    {% if task.note is not null %}
+                        <i class="far fa-comment-dots text-dark"></i>
+                    {% endif %}
                 </p>
-
             </div>
 
             <div class="text-end card-body">
