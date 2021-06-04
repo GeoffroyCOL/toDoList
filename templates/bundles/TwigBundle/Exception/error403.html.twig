@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<section class="container my-5 position-relative">
+    <h1 class="text-uppercase display-1">Accès interdit</h1>
+    <p>Vous ne pouvez pas accéder à cette partie du site. <a href="{{ path('home') }}">retour à l'accueil</a></p>
+    <img class="img-fluid w-100" src="../../images/403.png" alt="">
+</section>
+
+{% endblock %}
