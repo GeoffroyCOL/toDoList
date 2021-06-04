@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<section class="container my-5 position-relative">
+    <h1 class="text-uppercase display-1">Page non trouvée</h1>
+    <p>La page demandée n'existe pas ou plus. <a href="{{ path('home') }}">retour à l'accueil</a></p>
+    <img class="img-fluid w-100" src="../../images/404.png" alt="">
+</section>
+
+{% endblock %}
